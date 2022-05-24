@@ -14,7 +14,7 @@
             foreach(var course in accService.Gradebook.Descendants("Course")) {
                 <tr class=@(idx%2 < 1 ? "odd-row" : "even-row")>
                     <td class="class-name">
-                        <a href=@(NavManager.BaseUri+"assignments/@idx")>@course.Attribute("Title").Value</a>
+                        <a href=@(NavManager.BaseUri+"assignments/" + idx)>@course.Attribute("Title").Value</a>
                     </td>
                     @{var mark = course.Descendants("Mark").Last();}
                     <td class="score-str">@mark.Attribute("CalculatedScoreString").Value</td>
