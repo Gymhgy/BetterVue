@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BetterVue.dll": "sha256-JI7mzmRJosMjkX28VNpHb8SSD2xqM19vWjhlxihbkBQ=",
+      "BetterVue.dll": "sha256-5GawdFkYCWV1ItK1HXktRJq2LwG4zGqtzT9GL+YQb2A=",
       "Microsoft.AspNetCore.Components.dll": "sha256-5amB4722cRNgwuFW1ntOhwKyhszzRaYyrOd6IXagwWM=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-lvK8BjUqR4beKl9SjUAY5QQ4YJmQHr06AdtE+ngBd+E=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-u+tDYSLGnDwls4BgYIHrWhvhXHYYZFc1nYWdLQPErhg=",
