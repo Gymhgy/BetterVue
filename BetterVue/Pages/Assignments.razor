@@ -11,25 +11,24 @@
 	var courses = accService.Gradebook.Descendants("Course").ToList();
 	if (CourseIdx < courses.Count) {
 		var course = courses[CourseIdx];
+		<h3>@course.Attribute("Title").Value</h3>
 		<table>
-			<tbody>
-				@{
-					var assignments = course.Descendants("Mark").Last()
-											.Descendants("Assignment");
-					foreach(var assignment in assignments) {
-						<tr>
-							<td>@assignment.Attribute("Measure").Value</td>
-							<td>@assignment.Attribute("Type").Value</td>
-							<td>@assignment.Attribute("Score").Value</td>
-							<td>@assignment.Attribute("Points").Value</td>
-						</tr>
-					}
+			@{
+				var assignments = course.Descendants("Mark").Last()
+										.Descendants("Assignment");
+				foreach(var assignment in assignments) {
+					<tr>
+						<td>@assignment.Attribute("Measure").Value</td>
+						<td>@assignment.Attribute("Type").Value</td>
+						<td>@assignment.Attribute("Score").Value</td>
+						<td>@assignment.Attribute("Points").Value</td>
+					</tr>
 				}
-			</tbody>
+			}
 		</table>
 	}
 	else {
-		NavManager.NavigateTo(NavManager.BaseUri+"grades");
+		NavManager.NavigateTo("grades");
 	}
 
 }
@@ -39,7 +38,7 @@
 	public int CourseIdx { get; set; }
 	protected override void OnInitialized() {
 		if(accService.User is null) {
-			NavManager.NavigateTo(NavManager.BaseUri);
+			NavManager.NavigateTo("");
 			return;
 		}
 		

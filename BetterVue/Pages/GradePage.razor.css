@@ -7,16 +7,18 @@ table {
 
 }
 
-tr {
+table tr {
     height: 100px;
-    border-style: solid;
-    border-width: 3px;
+    border-bottom: 1px solid black;
+}
+table tr:last-child {
+    border-bottom: none;
 }
 
-.odd-row {
+table tr:nth-child(odd) td {
     background-color: white;
 }
-.even-row {
+table tr:nth-child(even) td{
     background-color: lightgray;
 }
 

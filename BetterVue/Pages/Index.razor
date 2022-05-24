@@ -24,7 +24,7 @@
     async Task ValidFormSubmitted (EditContext editContext) {
         await accService.LoginAsync(user);
         s = "Success!";
-        NavManager.NavigateTo(NavManager.BaseUri+"grades");
+        NavManager.NavigateTo("grades");
     }
 
     void InvalidFormSubmitted (EditContext edit) {
