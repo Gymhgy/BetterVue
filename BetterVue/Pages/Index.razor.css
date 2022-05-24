@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.container {
+    padding: 25px;
+    border-radius: 5px;
+    border-color: gray;
+    border-width: 2px;
+    border-style: solid;
+    max-width: 400px;
+}
+
+InputText {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    box-sizing: border-box;
+}

@@ -1,0 +1,48 @@
+﻿@page "/assignments/{CourseIdx:int}"
+
+@using System.Xml.Serialization
+@using System.Xml.Linq
+@using BetterVue.Services
+
+@inject IAccountService accService
+@inject NavigationManager NavManager
+
+@if(accService.Gradebook is not null) {
+	var courses = accService.Gradebook.Descendants("Course").ToList();
+	if (CourseIdx < courses.Count) {
+		var course = courses[CourseIdx];
+		<table>
+			<tbody>
+				@{
+					var assignments = course.Descendants("Mark").Last()
+											.Descendants("Assignment");
+					foreach(var assignment in assignments) {
+						<tr>
+							<td>@assignment.Attribute("Measure").Value</td>
+							<td>@assignment.Attribute("Type").Value</td>
+							<td>@assignment.Attribute("Score").Value</td>
+							<td>@assignment.Attribute("Points").Value</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	}
+	else {
+		NavManager.NavigateTo("/grades");
+	}
+
+}
+
+@code {
+	[Parameter]
+	public int CourseIdx { get; set; }
+	protected override void OnInitialized() {
+		if(accService.User is null) {
+			NavManager.NavigateTo("/");
+			return;
+		}
+		
+	}
+
+}

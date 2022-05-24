@@ -1,0 +1,40 @@
+﻿@page "/grades"
+@using System.Xml.Serialization
+@using System.Xml.Linq
+@using BetterVue.Services
+
+@inject IAccountService accService
+@inject NavigationManager NavManager
+
+
+<table>
+    <tbody>
+        @if(accService.Gradebook is not null){
+            int idx = 0;
+            foreach(var course in accService.Gradebook.Descendants("Course")) {
+                <tr class=@(idx%2 < 1 ? "odd-row" : "even-row")>
+                    <td class="class-name">
+                        <a href="/assignments/@idx">@course.Attribute("Title").Value</a>
+                    </td>
+                    @{var mark = course.Descendants("Mark").Last();}
+                    <td class="score-str">@mark.Attribute("CalculatedScoreString").Value</td>
+                    <td class="score-raw">@mark.Attribute("CalculatedScoreRaw").Value</td>
+                </tr>
+                idx++;
+            }
+        }
+    </tbody>
+</table>
+
+
+
+@code {
+    protected override void OnInitialized() {
+        if(accService.User is null) {
+            NavManager.NavigateTo("/");
+            return;
+        }
+    }
+
+
+}

@@ -1,0 +1,35 @@
+﻿@using System.Xml.Linq
+@using BetterVue.Services
+
+@inject IAccountService accService
+@inject NavigationManager NavManager
+
+@page "/"
+<center><h1> BetterVUE </h1></center>
+<EditForm Model=@user OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
+    <DataAnnotationsValidator/>
+    <div class="container">
+        <label for="Username">Username</label>
+        <InputText type="text" placeholder="Enter Username" @bind-Value=user.Username id="Username"/>
+        <label for="Password">Password</label>
+        <InputText type="password" placeholder="Enter Password" @bind-Value=user.Password id="Password"/>
+        <button type="submit">Login</button>
+    </div>
+</EditForm>
+@s
+@code{
+    User user = new User();
+
+    String? s;
+    async Task ValidFormSubmitted (EditContext editContext) {
+        await accService.LoginAsync(user);
+        s = "Success!";
+        NavManager.NavigateTo("/grades");
+    }
+
+    void InvalidFormSubmitted (EditContext edit) {
+        s = "fail";
+    }
+
+
+}
