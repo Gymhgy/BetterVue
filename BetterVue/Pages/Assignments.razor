@@ -29,7 +29,7 @@
 		</table>
 	}
 	else {
-		NavManager.NavigateTo("/grades");
+		NavManager.NavigateTo(NavManager.BaseUri+"grades");
 	}
 
 }
@@ -39,7 +39,7 @@
 	public int CourseIdx { get; set; }
 	protected override void OnInitialized() {
 		if(accService.User is null) {
-			NavManager.NavigateTo("/");
+			NavManager.NavigateTo(NavManager.BaseUri);
 			return;
 		}
 		

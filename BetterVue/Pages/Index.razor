@@ -16,7 +16,7 @@
         <button type="submit">Login</button>
     </div>
 </EditForm>
-@NavManager.BaseUri
+@s
 @code{
     User user = new User();
 
@@ -24,7 +24,7 @@
     async Task ValidFormSubmitted (EditContext editContext) {
         await accService.LoginAsync(user);
         s = "Success!";
-        NavManager.NavigateTo("/grades");
+        NavManager.NavigateTo(NavManager.BaseUri+"grades");
     }
 
     void InvalidFormSubmitted (EditContext edit) {
