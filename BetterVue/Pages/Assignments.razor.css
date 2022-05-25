@@ -1,3 +1,21 @@
 ﻿body {
+    width: 40%;
 }
 
+#overview {
+    display: flex;
+    justify-content: space-between;
+}
+table {
+    width: 100%;
+}
+    table tr {
+        border-bottom: 1px solid black;
+    }
+.changed {
+    background-color: lightgray;
+}
+
+td {
+    padding: 20px;
+}
