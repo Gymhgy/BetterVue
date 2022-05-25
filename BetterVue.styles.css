@@ -1,3 +1,25 @@
+/* /Pages/Assignments.razor.rz.scp.css */
+body[b-r8gxj9fqjo] {
+    width: 40%;
+}
+
+#overview[b-r8gxj9fqjo] {
+    display: flex;
+    justify-content: space-between;
+}
+table[b-r8gxj9fqjo] {
+    width: 100%;
+}
+    table tr[b-r8gxj9fqjo] {
+        border-bottom: 1px solid black;
+    }
+.changed[b-r8gxj9fqjo] {
+    background-color: lightgray;
+}
+
+td[b-r8gxj9fqjo] {
+    padding: 20px;
+}
 /* /Pages/GradePage.razor.rz.scp.css */
 body[b-zhf3nrrtv0] {
 }
@@ -8,16 +30,18 @@ table[b-zhf3nrrtv0] {
 
 }
 
-tr[b-zhf3nrrtv0] {
+table tr[b-zhf3nrrtv0] {
     height: 100px;
-    border-style: solid;
-    border-width: 3px;
+    border-bottom: 1px solid black;
+}
+table tr:last-child[b-zhf3nrrtv0] {
+    border-bottom: none;
 }
 
-.odd-row[b-zhf3nrrtv0] {
+table tr:nth-child(odd) td[b-zhf3nrrtv0] {
     background-color: white;
 }
-.even-row[b-zhf3nrrtv0] {
+table tr:nth-child(even) td[b-zhf3nrrtv0]{
     background-color: lightgray;
 }
 
