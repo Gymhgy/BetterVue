@@ -1,6 +1,6 @@
 /* /Pages/Assignments.razor.rz.scp.css */
 body[b-r8gxj9fqjo] {
-    width: 40%;
+    width: 60%;
 }
 
 #overview[b-r8gxj9fqjo] {
@@ -13,12 +13,23 @@ table[b-r8gxj9fqjo] {
     table tr[b-r8gxj9fqjo] {
         border-bottom: 1px solid black;
     }
+
+#finals[b-r8gxj9fqjo] {
+
+}
+
 .changed[b-r8gxj9fqjo] {
     background-color: lightgray;
 }
 
 td[b-r8gxj9fqjo] {
     padding: 20px;
+}
+/* /Pages/Finals.razor.rz.scp.css */
+.wrapper[b-wcvmq9o75c] {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
 }
 /* /Pages/GradePage.razor.rz.scp.css */
 body[b-zhf3nrrtv0] {
