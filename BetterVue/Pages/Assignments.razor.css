@@ -1,5 +1,5 @@
 ﻿body {
-    width: 40%;
+    width: 60%;
 }
 
 #overview {
@@ -12,6 +12,11 @@ table {
     table tr {
         border-bottom: 1px solid black;
     }
+
+#finals {
+
+}
+
 .changed {
     background-color: lightgray;
 }

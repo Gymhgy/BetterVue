@@ -10,6 +10,8 @@
 <body>
 	<div id="overview">
 		<h3>@course.Attribute("Title").Value</h3>
+		<button class="btn btn-primary" onclick=@Reset>Reset</button>
+		<a class="btn btn-primary" id="finals" href="finals/@CourseIdx">Finals Calculator</a>
 		<h3>@percent.ToString("F2")</h3>
 	</div>
 	<table>
@@ -106,7 +108,12 @@
 		Console.WriteLine(catPoints);
 		Console.WriteLine(catTotals);
 		percent = unnormalizedGrade / sumOfWeights * 100;
+	}
 
+	void Reset() {
+		for(int i = 0; i < assignments.Count; i++) {
+			assignments[i].Points = assignments[i].OriginalPointVal;
+		}
 	}
 
 }

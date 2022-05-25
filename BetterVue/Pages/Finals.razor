@@ -1,0 +1,85 @@
+﻿@page "/finals/{CourseIdx:int}"
+
+@using System.Xml.Serialization
+@using System.Xml.Linq
+@using BetterVue.Services
+@using System.ComponentModel.DataAnnotations
+
+@inject IAccountService accService
+@inject NavigationManager NavManager
+
+<EditForm Model=@model OnValidSubmit=@Calculate>
+    <DataAnnotationsValidator/>
+    <div class="wrapper">
+        <label for="type">What category will your final be graded in?</label>
+        <InputSelect @bind-Value=model.Type id="type">
+            @foreach(var category in weights) {
+                <option value=@category.Attribute("Type").Value>@category.Attribute("Type").Value</option>
+            }
+        </InputSelect>
+        <label for="desired-grade">What is your desired grade? (in %)</label>
+        <InputNumber @bind-Value=model.DesiredGrade id="desired-grade"></InputNumber>
+        <label for="point-worth">How many points is your final worth?</label>
+        <InputNumber @bind-Value=model.PointWorth id="point-worth"></InputNumber>
+        <button type="submit">Go!</button>
+    </div>
+</EditForm>
+<h3>You'll need a minimum of <strong>@min?.ToString("F2")</strong></h3>
+
+@code {
+    [Parameter]
+    public int CourseIdx { get; set; }
+
+    FinalForm model { get; set; } = new FinalForm();
+
+    List<XElement> weights;
+
+    protected override void OnInitialized() {
+        if (accService.User is null || accService.Gradebook is null) {
+            NavManager.NavigateTo("");
+            return;
+        }
+        var courses = accService.Gradebook.Descendants("Course").ToList();
+        if (CourseIdx < courses.Count) {
+            var course = courses[CourseIdx];
+            var mark = course.Descendants("Mark").Last();
+            weights = mark.Descendants("AssignmentGradeCalc").Where(w => w.Attribute("Type").Value != "TOTAL").ToList();
+        }
+        else {
+            NavManager.NavigateTo("grades");
+        }
+    }
+
+    double? min = null;
+    void Calculate(EditContext editContext) {
+        double sumOfWeights = 0;
+        double unnormalizedGrade = 0;
+        XElement finalCat = weights[0];
+        foreach(var category in weights) {
+            sumOfWeights += double.Parse(category.Attribute("Weight").Value.Trim('%'));
+            if (model.Type == category.Attribute("Type").Value) {
+                finalCat = category;
+                continue;
+            }
+            unnormalizedGrade += double.Parse(category.Attribute("WeightedPct").Value.Trim('%'));
+        }
+        var curPoints = double.Parse(finalCat.Attribute("Points").Value);
+        var total = double.Parse(finalCat.Attribute("PointsPossible").Value) + model.PointWorth;
+        var weight = double.Parse(finalCat.Attribute("Weight").Value.Trim('%'));
+        min = ((((model.DesiredGrade / 100 * sumOfWeights) - unnormalizedGrade) / weight * total) - curPoints);
+    }
+
+    //Haha
+    class FinalForm {
+
+        [Required]
+        public string Type { get; set; }
+        [Required]
+        public double DesiredGrade { get; set; }
+        [Required]
+		public double PointWorth { get; set; }
+
+
+	}
+
+}
